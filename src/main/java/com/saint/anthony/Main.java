@@ -1,12 +1,14 @@
 package com.saint.anthony;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 public class Main {
     public static void main(String[] args) {
-        // Створили два об"єкта інтерфейсів, але присвоїли їм
-        // значення реалізуючих класів(поліморфізм)
-        MessageProvider provider = MessageFactory.getProvider();
-        MessageRenderer renderer = MessageFactory.getRenderer();
-        // Запустили рендер
+        ApplicationContext context =
+                new AnnotationConfigApplicationContext(JavaConfig.class);
+        MessageRenderer renderer = context.getBean("simpleMessageRenderer", MessageRenderer.class);
         renderer.render();
     }
 }
